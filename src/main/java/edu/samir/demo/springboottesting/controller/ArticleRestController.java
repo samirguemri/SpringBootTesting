@@ -8,10 +8,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
-@RequestMapping("/article")
+@RequestMapping("api/article")
 @RequiredArgsConstructor
 public class ArticleRestController {
 
@@ -46,9 +47,9 @@ public class ArticleRestController {
         return new ResponseEntity<>(this.articleService.updateArticle(updated), HttpStatus.ACCEPTED);
     }
 
+    @RolesAllowed("ADMIN")
     @DeleteMapping("delete/{articleId}")
-    public ResponseEntity<Void> removeArticleById(@PathVariable Long articleId) {
+    public void removeArticleById(@PathVariable Long articleId) {
         this.articleService.deleteArticleById(articleId);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }
