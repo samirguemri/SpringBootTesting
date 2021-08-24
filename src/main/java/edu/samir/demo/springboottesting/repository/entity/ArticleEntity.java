@@ -15,15 +15,11 @@ import javax.persistence.*;
 public class ArticleEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @SequenceGenerator(name = "seq_article", sequenceName = "seq_article")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
     private String description;
     private long price;
 
-    public ArticleEntity(String name, String description, int price) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-    }
 }
